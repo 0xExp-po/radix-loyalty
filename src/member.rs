@@ -28,6 +28,9 @@ mod member {
         // Call instantiate_member to create a new member (will have 1 membership card and 0 rewards)
         pub fn instantiate_member() -> Global<Member> {
 
+            let (address_reservation, component_address) =
+            Runtime::allocate_component_address(Runtime::blueprint_id()); 
+
             let rewards_token_resource_manager: ResourceManager = ResourceBuilder::new_fungible(OwnerRole::None)
             .divisibility(DIVISIBILITY_NONE)
             .metadata(metadata!(
@@ -37,6 +40,10 @@ mod member {
                     "description" => "Rewards for activity".to_owned(), locked;
                 }
             ))
+            .mint_roles(mint_roles! {
+                minter => rule!(require(global_caller(component_address))); 
+                minter_updater => rule!(deny_all);
+            })
             .create_with_no_initial_supply();
 
             // Create resource representing membership card, to be minted by user. Maximum 1 can be minted per account.
@@ -46,7 +53,12 @@ mod member {
                         "name" => "Member Card", locked;
                         "symbol" => "MEM_CARD", locked;
                     }
-                }).create_with_no_initial_supply();
+                })
+                .mint_roles(mint_roles! {
+                    minter => rule!(require(global_caller(component_address))); 
+                    minter_updater => rule!(deny_all);
+                })
+                .create_with_no_initial_supply();
 
             // Instantiate a Member component with member card and empty rewards bucket
             Self {
@@ -55,6 +67,7 @@ mod member {
             }
             .instantiate()
             .prepare_to_globalize(OwnerRole::None)
+            .with_address(address_reservation) 
             .globalize()
         }
 
