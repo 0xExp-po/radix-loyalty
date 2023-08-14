@@ -75,7 +75,7 @@ mod member {
          * Only an account without an existing membership card can mint a new one
          */
         pub fn mint_member_card(&self) -> Bucket {
-            // if account has a user badge then error out
+            // todo: if account already has member card error out
             
             // mint and return user badge
             let member_card = self.member_card_resource_manager.mint(1);
