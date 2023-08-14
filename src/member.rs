@@ -76,9 +76,8 @@ mod member {
          */
         pub fn mint_member_card(&self) -> Bucket {
             // todo: if account already has member card error out
-            
-            // mint and return user badge
-            let member_card = self.member_card_resource_manager.mint(1);
+            let new_card_data = MembershipData { level: "Silver".to_owned() };
+            let member_card = self.member_card_resource_manager.mint_ruid_non_fungible(new_card_data);
 
             member_card
         }
@@ -89,17 +88,17 @@ mod member {
         pub fn get_reward_for_task(&self, task: Tasks) -> Bucket{
             let rewards: Bucket;
             match task {
-                Tasks::Vote(poll_name, reward_name) => {
-                    println!("Member voted for poll: {}, collect {} pts.", poll_name, reward_name);
-                    rewards = self.rewards_token_resource_manager.mint(reward_name);
+                Tasks::Vote(poll_name, reward_amount) => {
+                    println!("Member voted for poll: {}, collect {} pts.", poll_name, reward_amount);
+                    rewards = self.rewards_token_resource_manager.mint(reward_amount);
                 }
-                Tasks::AttendEvent(event_name, reward_name) => {
-                    println!("Member attended event: {}, collect {} pts.", event_name, reward_name);
-                    rewards = self.rewards_token_resource_manager.mint(reward_name);
+                Tasks::AttendEvent(event_name, reward_amount) => {
+                    println!("Member attended event: {}, collect {} pts.", event_name, reward_amount);
+                    rewards = self.rewards_token_resource_manager.mint(reward_amount);
                 }
-                Tasks::SayHi(reward_name) => {
-                    println!("Member said hi!, collect {} pts.", reward_name);
-                    rewards = self.rewards_token_resource_manager.mint(reward_name)
+                Tasks::SayHi(reward_amount) => {
+                    println!("Member said hi!, collect {} pts.", reward_amount);
+                    rewards = self.rewards_token_resource_manager.mint(reward_amount)
                 }
             }
 

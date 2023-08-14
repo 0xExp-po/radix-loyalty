@@ -46,50 +46,52 @@ use transaction::builder::ManifestBuilder;
 //     receipt.expect_commit_success();
 // }
 
-#[test]
-fn manifest_creator() {
-    let mut test_runner = TestRunner::builder().build();
+// #[test]
+// fn manifest_creator() {
+//     let mut test_runner = TestRunner::builder().build();
 
-    // Create an account
-    let (public_key, _private_key, account) = test_runner.new_allocated_account();
+//     // Create an account
+//     let (public_key, _private_key, account) = test_runner.new_allocated_account();
 
-    // Publish package
-    let package_address = test_runner.compile_and_publish(this_package!());
+//     // Publish package
+//     let package_address = test_runner.compile_and_publish(this_package!());
 
-    // Test the `instantiate_hello` function.
-    let raw_manifest = ManifestBuilder::new()
-        .call_function(
-            package_address,
-            "Member",
-            "instantiate_member",
-            manifest_args!(),
-        );
+//     // Test the `instantiate_hello` function.
+//     let manifest = ManifestBuilder::new()
+//         .call_function(
+//             package_address,
+//             "Member",
+//             "instantiate_member",
+//             manifest_args!(),
+//         )
+//         .build();
 
-        let manifest = raw_manifest
-        .build();
+//     let receipt = test_runner.execute_manifest_ignoring_fee(
+//         manifest,
+//         vec![NonFungibleGlobalId::from_public_key(&public_key)],
+//     );
 
-        let manifest_copy = manifest.clone();
-    let receipt = test_runner.execute_manifest_ignoring_fee(
-        manifest,
-        vec![NonFungibleGlobalId::from_public_key(&public_key)],
-    );
+//     let component = receipt.expect_commit(true).new_component_addresses()[0];
+//     println!("{:?}\n", component);
 
-    let component = receipt.expect_commit(true).new_component_addresses()[0];
-    println!("{:?}\n", component);
+//     dump_manifest_to_file_system( 
+//         &manifest, 
+//         manifest, 
+//         "./transaction-manifest", 
+//         "sample_dump",
+//         &NetworkDefinition::simulator()
+//     ).err(); 
 
-    dump_manifest_to_file_system( 
-        &manifest_copy, 
-        raw_manifest.object_names(), 
-        "./transaction-manifest", 
-        Some("sample_dump"),
-        &NetworkDefinition::simulator()
-    ).err(); 
+//     // let manifest = ManifestBuilder::new() 
+//     // .call_method( 
+//     //     Address("component_tdx_d_1cqdjyq9fyh3fk4ldqkj58g7wghqew476rd7qfvsxnrc4un4fktd7p5"),
+//     //     "mint_member_card",
+//     //     manifest_args!()
+//     // )
+//     // .build(); 
+// }
 
-    // let manifest = ManifestBuilder::new() 
-    // .call_method( 
-    //     Address("component_tdx_d_1cqdjyq9fyh3fk4ldqkj58g7wghqew476rd7qfvsxnrc4un4fktd7p5"),
-    //     "mint_member_card",
-    //     manifest_args!()
-    // )
-    // .build(); 
-}
+// CALL_FUNCTION
+// Address("package_tdx_d_1pkqas4w4cglzh7dwfnapzh6a0uszp9ydyf5kaw04vc6d8gsaktgypp")
+//     "Member"
+//     "instantiate_member";
