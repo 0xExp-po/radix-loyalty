@@ -1,0 +1,9 @@
+CALL_METHOD
+    Address("component_sim1cqs0rnmld9e9jhrd2ujcnp0np4n30ph0u9307ulnr28tvrjy8tu2jl")
+    "mint_member_card"
+;
+CALL_METHOD
+    Address("account_sim1cyfhfs4a94n7kp7k47s55yx685lgwvp2kc6k6tm9kev8qpnlgjea7f")
+    "try_deposit_batch_or_abort"
+    Expression("ENTIRE_WORKTOP")
+;

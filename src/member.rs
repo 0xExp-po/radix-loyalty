@@ -8,7 +8,7 @@ struct MembershipData{
 }
 
 // define task and reward
-#[derive(ScryptoSbor)]
+#[derive(ScryptoSbor,ManifestEncode)]
 pub enum Tasks{
     Vote(String, u32),
     AttendEvent(String, u32),
@@ -102,6 +102,11 @@ mod member {
                 }
             }
 
+            rewards
+        }
+
+        pub fn get_reward_for_task_2(&self) -> Bucket{
+            let rewards: Bucket = self.rewards_token_resource_manager.mint(13);
             rewards
         }
     }
