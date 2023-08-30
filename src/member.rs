@@ -20,6 +20,8 @@ mod member {
     struct Member {
         // rewards token
         rewards_token_resource_manager: ResourceManager,
+        // dream token
+        dream_token_resource_manager: ResourceManager,
         // where member's card is held
         member_card_resource_manager: ResourceManager,
     }
@@ -46,6 +48,21 @@ mod member {
             })
             .create_with_no_initial_supply();
 
+            let dream_token_resource_manager: ResourceManager = ResourceBuilder::new_fungible(OwnerRole::None)
+            .divisibility(DIVISIBILITY_NONE)
+            .metadata(metadata!(
+                init {
+                    "name" => "Dream_Token".to_owned(), locked;
+                    "symbol" => "DRM".to_owned(), locked;
+                    "description" => "Dream tokens are for big dreams".to_owned(), locked;
+                }
+            ))
+            .mint_roles(mint_roles! {
+                minter => rule!(require(global_caller(component_address))); 
+                minter_updater => rule!(deny_all);
+            })
+            .create_with_no_initial_supply();
+
             // Create resource representing membership card, to be minted by user. Maximum 1 can be minted per account.
             let member_card_resource_manager: ResourceManager = ResourceBuilder::new_ruid_non_fungible::<MembershipData>(OwnerRole::None)
                 .metadata(metadata! {
@@ -63,6 +80,7 @@ mod member {
             // Instantiate a Member component with member card and empty rewards bucket
             Self {
                 rewards_token_resource_manager,
+                dream_token_resource_manager,
                 member_card_resource_manager,
             }
             .instantiate()
@@ -105,9 +123,10 @@ mod member {
             rewards
         }
 
-        pub fn get_reward_for_task_2(&self) -> Bucket{
+        pub fn get_reward_for_task_2(&self) -> (Bucket, Bucket){
             let rewards: Bucket = self.rewards_token_resource_manager.mint(13);
-            rewards
+            let dream: Bucket = self.dream_token_resource_manager.mint(7);
+            (rewards, dream)
         }
     }
 }

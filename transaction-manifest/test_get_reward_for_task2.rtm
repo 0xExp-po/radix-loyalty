@@ -1,0 +1,9 @@
+# gives REWARD and DREAM tokens Godwillingly
+CALL_METHOD    
+    Address("component_tdx_d_1czcct85fnu8u7h4gtd8jkwawxm92m38fea742dwjg56vmhje9ln029")
+    "get_reward_for_task_2";
+
+CALL_METHOD
+    Address("account_tdx_d_1295e4znmu5lm4kwd804u7r5chlld9hqduwx0vl378yje74pwsg65as")
+    "deposit_batch"
+    Expression("ENTIRE_WORKTOP");
