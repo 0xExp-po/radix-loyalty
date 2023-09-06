@@ -4,7 +4,8 @@ use scrypto::prelude::*;
 #[derive(ScryptoSbor, NonFungibleData)]
 struct MembershipData{
     // user level, great for gamification and advancing to the next level
-    level: String
+    level: String,
+    join_date_time: Instant
 }
 
 // define task and reward
@@ -24,6 +25,8 @@ mod member {
         dream_token_resource_manager: ResourceManager,
         // where member's card is held
         member_card_resource_manager: ResourceManager,
+        // membership ID counter
+        member_id_counter: u64
     }
     impl Member {
 
@@ -64,11 +67,13 @@ mod member {
             .create_with_no_initial_supply();
 
             // Create resource representing membership card, to be minted by user. Maximum 1 can be minted per account.
-            let member_card_resource_manager: ResourceManager = ResourceBuilder::new_ruid_non_fungible::<MembershipData>(OwnerRole::None)
-                .metadata(metadata! {
+            // TODO: chagne RUID after wallet is fixed
+            // let member_card_resource_manager: ResourceManager = ResourceBuilder::new_ruid_non_fungible::<MembershipData>(OwnerRole::None)
+            let member_card_resource_manager: ResourceManager = ResourceBuilder::new_integer_non_fungible::<MembershipData>(OwnerRole::None)
+                 .metadata(metadata! {
                     init {
                         "name" => "Member Card", locked;
-                        "symbol" => "MEM_CARD", locked;
+                        "symbol" => "MEMBER_CARD", locked;
                     }
                 })
                 .mint_roles(mint_roles! {
@@ -82,6 +87,7 @@ mod member {
                 rewards_token_resource_manager,
                 dream_token_resource_manager,
                 member_card_resource_manager,
+                member_id_counter: 0u64
             }
             .instantiate()
             .prepare_to_globalize(OwnerRole::None)
@@ -90,15 +96,29 @@ mod member {
         }
 
         /**
-         * Only an account without an existing membership card can mint a new one
+         * TODO: to use in place of ruid based NFTs (see below)
          */
-        pub fn mint_member_card(&self) -> Bucket {
+        pub fn mint_member_card(&mut self) -> Bucket {
+            self.member_id_counter += 1;
             // todo: if account already has member card error out
-            let new_card_data = MembershipData { level: "Silver".to_owned() };
-            let member_card = self.member_card_resource_manager.mint_ruid_non_fungible(new_card_data);
+            let new_card_data = MembershipData { level: "0".to_owned(), join_date_time: Clock::current_time_rounded_to_minutes()};
+            let member_card = self.member_card_resource_manager
+                                        .mint_non_fungible(&NonFungibleLocalId::integer(self.member_id_counter),new_card_data);
 
             member_card
         }
+
+        /**
+         * // TODO: when RUID is fixed with wallet use this
+         * Only an account without an existing membership card can mint a new one
+         */
+        // pub fn mint_member_card(&self) -> Bucket {
+        //     // todo: if account already has member card error out
+        //     let new_card_data = MembershipData { level: "Silver".to_owned() };
+        //     let member_card = self.member_card_resource_manager.mint_ruid_non_fungible(new_card_data);
+
+        //     member_card
+        // }
 
         /**
          * Complete task and get the associated award
@@ -127,6 +147,16 @@ mod member {
             let rewards: Bucket = self.rewards_token_resource_manager.mint(13);
             let dream: Bucket = self.dream_token_resource_manager.mint(7);
             (rewards, dream)
+        }
+
+        /**
+         * get reward on task based on reward amount and description
+         * @Returns rewards bucket
+         */
+        pub fn get_reward_with_reason(&self, reward_amount: u64, reason: String) -> Bucket{
+            println!("Member said hi!, collect reward_amount: {} for reason: {}.", reward_amount, reason);
+            let rewards: Bucket = self.rewards_token_resource_manager.mint(reward_amount);
+            rewards
         }
     }
 }
