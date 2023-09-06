@@ -34,7 +34,7 @@ mod member {
         pub fn instantiate_member() -> Global<Member> {
 
             let (address_reservation, component_address) =
-            Runtime::allocate_component_address(Runtime::blueprint_id()); 
+            Runtime::allocate_component_address(Member::blueprint_id()); 
 
             let rewards_token_resource_manager: ResourceManager = ResourceBuilder::new_fungible(OwnerRole::None)
             .divisibility(DIVISIBILITY_NONE)
