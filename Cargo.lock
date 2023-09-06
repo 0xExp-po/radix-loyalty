@@ -329,6 +329,7 @@ checksum = "f830c31a9c9fb94e2d27fbc76daf642784ce14eb3910d4719e29b50ccda5d0f0"
 name = "general-kit"
 version = "0.1.0"
 dependencies = [
+ "general-kit",
  "radix-engine",
  "radix-engine-interface",
  "sbor",

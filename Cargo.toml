@@ -13,6 +13,7 @@ radix-engine = { git = "https://github.com/radixdlt/radixdlt-scrypto", tag = "v0
 scrypto-unit = { git = "https://github.com/radixdlt/radixdlt-scrypto", tag = "v0.12.0" }
 scrypto-test = { git = "https://github.com/radixdlt/radixdlt-scrypto", tag = "v0.12.0" }
 radix-engine-interface = { git = "https://github.com/radixdlt/radixdlt-scrypto", tag = "v0.12.0" }
+general-kit = { path = ".", features = ["test"] }
 
 [profile.release]
 opt-level = 'z'        # Optimize for size.
