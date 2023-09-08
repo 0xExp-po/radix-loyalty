@@ -18,6 +18,18 @@ pub enum Tasks{
 
 #[blueprint]
 mod member {
+    enable_method_auth! {
+        roles {
+            member => updatable_by: [OWNER];
+        },
+        methods {
+            mint_member_card => PUBLIC;
+            get_reward_for_task => restrict_to: [member];
+            get_reward_for_task_2 => restrict_to: [member];
+            get_reward_with_reason => restrict_to: [member];
+        }
+    }
+
     struct Member {
         // rewards token
         rewards_token_resource_manager: ResourceManager,
@@ -31,7 +43,7 @@ mod member {
     impl Member {
 
         // Call instantiate_member to create a new member (will have 1 membership card and 0 rewards)
-        pub fn instantiate_member() -> Global<Member> {
+        pub fn instantiate_member(owner_badge: ResourceAddress) -> Global<Member> {
 
             let (address_reservation, component_address) =
             Runtime::allocate_component_address(Member::blueprint_id()); 
@@ -90,7 +102,15 @@ mod member {
                 member_id_counter: 0u64
             }
             .instantiate()
-            .prepare_to_globalize(OwnerRole::None)
+            .prepare_to_globalize(OwnerRole::Fixed( 
+                    rule!(require(owner_badge))
+                )
+            )
+            .roles(
+                roles!(
+                    member => rule!(require(member_card_resource_manager.address())); 
+                )
+            )
             .with_address(address_reservation) 
             .globalize()
         }

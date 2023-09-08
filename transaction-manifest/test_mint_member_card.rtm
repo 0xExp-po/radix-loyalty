@@ -1,7 +1,7 @@
 CALL_METHOD
-    Address("component_sim1cqs0rnmld9e9jhrd2ujcnp0np4n30ph0u9307ulnr28tvrjy8tu2jl")
+    Address("component_tdx_e_1cr76vctsd757snn83tyqkluq3z3utgzanxaz8vd7dxzerrdqc0yu7d")
     "mint_member_card";
 CALL_METHOD
-    Address("account_sim1cyfhfs4a94n7kp7k47s55yx685lgwvp2kc6k6tm9kev8qpnlgjea7f")
-    "try_deposit_batch_or_abort"
+    Address("account_tdx_e_129rwpzfdsevjpm0tnt9u8fs54zeynuxsmg7xdanm0gugpvhfd8rt29")
+    "deposit_batch"
     Expression("ENTIRE_WORKTOP");
