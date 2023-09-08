@@ -1,5 +1,5 @@
 CALL_METHOD
-    Address("component_tdx_d_1czcct85fnu8u7h4gtd8jkwawxm92m38fea742dwjg56vmhje9ln029")
+    Address("component_tdx_e_1cppz3j4jr32z7ewskevakscv3m9p5vs869ke37ckzslmavtdazje7k")
     "get_reward_for_task"
     Enum<1u8>(
         "my_nice_event",
@@ -7,6 +7,6 @@ CALL_METHOD
     );
 
 CALL_METHOD
-    Address("account_tdx_d_1295e4znmu5lm4kwd804u7r5chlld9hqduwx0vl378yje74pwsg65as")
+    Address("account_tdx_e_12x4n0vsyzejp0zlna7vmvzcnsmfsf0jatqd55s0v0nqc9p26dle54l")
     "try_deposit_batch_or_abort"
     Expression("ENTIRE_WORKTOP");
