@@ -1,0 +1,6 @@
+CALL_METHOD
+    Address("account_sim1cywetnvsd3xuxhrxpa7kn5wvh9ty4z869z3q5f0n4yw3mqsea2ntml")
+    "create_proof_of_amount"
+    Address("resource_sim1nf9jdmppxdngrkqfk8j7kkj808k8na0ruqkxngw66mqj0qexp4gkle")
+    Decimal("1")
+;
