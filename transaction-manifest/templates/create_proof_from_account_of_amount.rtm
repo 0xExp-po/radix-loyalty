@@ -1,0 +1,6 @@
+CALL_METHOD
+    Address("<loyalty_member_account_address>")
+    "create_proof_of_amount"
+    Address("<member_card_nft_address>")
+    Decimal("1")
+;

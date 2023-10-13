@@ -1,0 +1,7 @@
+CALL_METHOD
+    Address("<member_component_address>")
+    "mint_member_card";
+CALL_METHOD
+    Address("<loyalty_member_account_address>")
+    "deposit_batch"
+    Expression("ENTIRE_WORKTOP");

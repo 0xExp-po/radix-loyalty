@@ -1,0 +1,5 @@
+CALL_FUNCTION
+    Address("<package_address>")
+    "Member"
+    "instantiate_member"
+    Address("<package_owner_badge_nft_address>");

@@ -1,0 +1,18 @@
+CALL_METHOD
+    Address("<loyalty_member_account_address>")
+    "create_proof_of_non_fungibles"
+    Address("<member_card_nft_address>")
+    Array<NonFungibleLocalId>(
+        NonFungibleLocalId("#1#")
+    );
+
+CALL_METHOD
+    Address("<member_component_address>")
+    "get_reward_with_reason"
+    17u64
+    "loving the users of this dApp";
+
+CALL_METHOD
+    Address("<loyalty_member_account_address>")
+    "deposit_batch"
+    Expression("ENTIRE_WORKTOP");
