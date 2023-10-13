@@ -1,0 +1,5 @@
+CALL_FUNCTION
+    Address("package_tdx_2_1p4ukk762enprf8hqelshn2mc7f4ht26s0d3uf0caet78r2w6ee2g6v")
+    "Member"
+    "instantiate_member"
+    Address("resource_tdx_2_1nfxxxxxxxxxxpkgwnrxxxxxxxxx002558553505xxxxxxxxxfzgzzk");

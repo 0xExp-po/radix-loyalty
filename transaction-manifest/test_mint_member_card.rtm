@@ -1,7 +1,0 @@
-CALL_METHOD
-    Address("component_tdx_e_1cppz3j4jr32z7ewskevakscv3m9p5vs869ke37ckzslmavtdazje7k")
-    "mint_member_card";
-CALL_METHOD
-    Address("account_tdx_e_12x4n0vsyzejp0zlna7vmvzcnsmfsf0jatqd55s0v0nqc9p26dle54l")
-    "deposit_batch"
-    Expression("ENTIRE_WORKTOP");

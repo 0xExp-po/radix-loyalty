@@ -1,9 +1,9 @@
 # TODO
 ## Main
 [x] Mint Membership NFT 
-[x] view NFT metadata on dashboard
+[||] view NFT metadata on dashboard - NFT IDs are wrong on dashboard (could be bug on their side). Rest can be read.
 
-[] Invoke task with "reward_amount" and "reason" as inputs
+[x] Invoke task with "reward_amount" and "reason" as inputs, requiring member proof
 
 [] logging: how do I log the reason for the reward and persist that on blockchain transaction
 
