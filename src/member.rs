@@ -27,6 +27,7 @@ mod member {
             get_reward_for_task => restrict_to: [member];
             get_reward_for_task_2 => restrict_to: [member];
             get_reward_with_reason => restrict_to: [member];
+            despot_to_xrd_fee_vault => PUBLIC;
         }
     }
 
@@ -38,7 +39,9 @@ mod member {
         // where member's card is held
         member_card_resource_manager: ResourceManager,
         // membership ID counter
-        member_id_counter: u64
+        member_id_counter: u64,
+        // fee payer
+        xrd_fee_vault: Vault,
     }
     impl Member {
 
@@ -99,7 +102,8 @@ mod member {
                 rewards_token_resource_manager,
                 dream_token_resource_manager,
                 member_card_resource_manager,
-                member_id_counter: 0u64
+                member_id_counter: 0u64,
+                xrd_fee_vault: Vault::new(XRD)
             }
             .instantiate()
             .prepare_to_globalize(OwnerRole::Fixed( 
@@ -173,10 +177,15 @@ mod member {
          * get reward on task based on reward amount and description
          * @Returns rewards bucket
          */
-        pub fn get_reward_with_reason(&self, reward_amount: u64, reason: String) -> Bucket{
+        pub fn get_reward_with_reason(&mut self, reward_amount: u64, reason: String) -> Bucket{
+            // self.xrd_fee_vault.lock;
             println!("Member said hi!, collect reward_amount: {} for reason: {}.", reward_amount, reason);
             let rewards: Bucket = self.rewards_token_resource_manager.mint(reward_amount);
             rewards
+        }
+
+        pub fn despot_to_xrd_fee_vault(&mut self, xrd_bucket: Bucket) -> () {
+            self.xrd_fee_vault.put(xrd_bucket);
         }
     }
 }
