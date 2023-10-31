@@ -175,6 +175,7 @@ mod member {
 
         /**
          * get reward on task based on reward amount and description
+         * gas sponsorship available if user has not consumed more than gas amount threshold
          * @Returns rewards bucket
          */
         pub fn get_reward_with_reason(&mut self, reward_amount: u64, reason: String) -> Bucket{
@@ -184,7 +185,7 @@ mod member {
             rewards
         }
 
-        pub fn despot_to_xrd_fee_vault(&mut self, xrd_bucket: Bucket) -> () {
+        pub fn deposit_xrd(&mut self, xrd_bucket: Bucket) -> () {
             self.xrd_fee_vault.put(xrd_bucket);
         }
     }
