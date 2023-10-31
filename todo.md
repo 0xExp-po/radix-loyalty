@@ -5,8 +5,7 @@
 
 [x] Invoke task with "reward_amount" and "reason" as inputs, requiring member proof
 
-[] logging: how do I log the reason for the reward and persist that on blockchain transaction
-
+[] Gas fee
 [] Make membercard none transferable (soul bound)
 
 ## Enhancements needed for Demo insha-Allah
