@@ -1,6 +1,6 @@
 CALL_METHOD
-    Address("account_tdx_2_129st9uu409vwrgfupc9r7rz7d5fmsywv7qnaplfd9r6gaqpr5cp4wr")
+    Address("account_tdx_2_129k3nexq9hmzgy0z83wwc425y7lgdwmcnj5qs7xc9nk5w4xwc7u6pd")
     "create_proof_of_amount"
-    Address("resource_tdx_2_1ntj6yfys4dac44xgzy765yt7mc4rx6rfsuepg0yur304gr980zn75y")
+    Address("resource_tdx_2_1nfvu8e2ck2csn6n7q8zt7qm0jrnn69kyr47lega4vn04mfclhxu0aw")
     Decimal("1")
 ;

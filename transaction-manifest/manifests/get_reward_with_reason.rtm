@@ -1,18 +1,18 @@
 CALL_METHOD
-    Address("account_tdx_2_129st9uu409vwrgfupc9r7rz7d5fmsywv7qnaplfd9r6gaqpr5cp4wr")
+    Address("account_tdx_2_129k3nexq9hmzgy0z83wwc425y7lgdwmcnj5qs7xc9nk5w4xwc7u6pd")
     "create_proof_of_non_fungibles"
-    Address("resource_tdx_2_1ntj6yfys4dac44xgzy765yt7mc4rx6rfsuepg0yur304gr980zn75y")
+    Address("resource_tdx_2_1nfvu8e2ck2csn6n7q8zt7qm0jrnn69kyr47lega4vn04mfclhxu0aw")
     Array<NonFungibleLocalId>(
         NonFungibleLocalId("#1#")
     );
 
 CALL_METHOD
-    Address("component_tdx_2_1cp2f9zz0gun8ggflgw0jy2jekpjx0uuv0lszt04s4d5cvr8kd586qx")
+    Address("component_tdx_2_1cpmsrzkx89vuwmmcqsmgmyf3vuul846cp6fvhtqysnjdymgchsk5wz")
     "get_reward_with_reason"
     17u64
     "loving the users of this dApp";
 
 CALL_METHOD
-    Address("account_tdx_2_129st9uu409vwrgfupc9r7rz7d5fmsywv7qnaplfd9r6gaqpr5cp4wr")
+    Address("account_tdx_2_129k3nexq9hmzgy0z83wwc425y7lgdwmcnj5qs7xc9nk5w4xwc7u6pd")
     "deposit_batch"
     Expression("ENTIRE_WORKTOP");

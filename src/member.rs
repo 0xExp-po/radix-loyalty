@@ -27,7 +27,7 @@ mod member {
             get_reward_for_task => restrict_to: [member];
             get_reward_for_task_2 => restrict_to: [member];
             get_reward_with_reason => restrict_to: [member];
-            despot_to_xrd_fee_vault => PUBLIC;
+            deposit_xrd => PUBLIC;
         }
     }
 
@@ -146,6 +146,7 @@ mod member {
 
         /**
          * Complete task and get the associated award
+         * Deprecated
          */
         pub fn get_reward_for_task(&self, task: Tasks) -> Bucket{
             let rewards: Bucket;
